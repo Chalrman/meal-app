@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MealMate Dashboard</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,63 +23,150 @@
 
 body{
 
-    background:linear-gradient(135deg,#0f172a,#1e293b,#0f172a);
     min-height:100vh;
-    color:white;
+
     overflow-x:hidden;
 
+    color:white;
+
+    background:
+    radial-gradient(circle at top left,#2563eb55,transparent 40%),
+    radial-gradient(circle at bottom right,#7c3aed55,transparent 40%),
+    linear-gradient(135deg,#0f172a,#111827,#020617);
+
 }
 
-/* Scrollbar */
+/* floating blobs */
 
-::-webkit-scrollbar{
-    width:8px;
-}
+body::before{
 
-::-webkit-scrollbar-thumb{
-    background:#2563eb;
-    border-radius:20px;
-}
-
-/* Hamburger */
-
-.menu-btn{
+    content:"";
 
     position:fixed;
-    top:20px;
-    left:20px;
 
-    width:52px;
-    height:52px;
+    width:350px;
 
-    border-radius:15px;
+    height:350px;
 
-    background:rgba(255,255,255,.1);
+    background:#2563eb55;
+
+    border-radius:50%;
+
+    filter:blur(120px);
+
+    top:-120px;
+
+    left:-100px;
+
+    animation:float1 12s infinite alternate;
+
+    z-index:-1;
+
+}
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    width:320px;
+
+    height:320px;
+
+    background:#9333ea55;
+
+    border-radius:50%;
+
+    filter:blur(120px);
+
+    right:-100px;
+
+    bottom:-120px;
+
+    animation:float2 14s infinite alternate;
+
+    z-index:-1;
+
+}
+
+@keyframes float1{
+
+from{
+
+transform:translate(0,0);
+
+}
+
+to{
+
+transform:translate(120px,80px);
+
+}
+
+}
+
+@keyframes float2{
+
+from{
+
+transform:translate(0,0);
+
+}
+
+to{
+
+transform:translate(-100px,-60px);
+
+}
+
+}
+
+/* hamburger */
+
+.menu{
+
+    position:fixed;
+
+    top:22px;
+
+    left:22px;
+
+    width:55px;
+
+    height:55px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(255,255,255,.08);
 
     backdrop-filter:blur(20px);
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    border-radius:16px;
 
     cursor:pointer;
-
-    font-size:28px;
 
     z-index:1001;
 
     transition:.3s;
 
+    font-size:28px;
+
 }
 
-.menu-btn:hover{
+.menu:hover{
 
     background:#2563eb;
+
     transform:scale(1.08);
 
 }
 
-/* Sidebar */
+/* sidebar */
 
 .sidebar{
 
@@ -85,57 +174,72 @@ body{
 
     top:0;
 
-    left:-270px;
+    left:-280px;
 
-    width:250px;
+    width:260px;
 
     height:100vh;
 
     background:rgba(15,23,42,.95);
 
-    backdrop-filter:blur(18px);
+    backdrop-filter:blur(30px);
 
-    border-right:1px solid rgba(255,255,255,.1);
+    border-right:1px solid rgba(255,255,255,.08);
 
     transition:.35s;
 
     z-index:1000;
 
-    padding:25px;
+    padding:30px;
 
 }
 
-.sidebar.open{
+.sidebar.active{
 
     left:0;
 
 }
 
-.sidebar h2{
+.logo{
 
-    margin-top:70px;
+    font-size:32px;
+
+    font-weight:700;
+
+    margin-top:60px;
 
     margin-bottom:40px;
 
-    font-size:30px;
-
 }
 
-.sidebar a{
+.sidebar a,
+.sidebar button{
+
+    width:100%;
 
     display:block;
 
-    color:white;
-
     text-decoration:none;
 
-    padding:15px;
+    color:white;
 
-    margin-bottom:8px;
+    padding:16px;
 
-    border-radius:12px;
+    margin-bottom:10px;
+
+    border-radius:14px;
 
     transition:.25s;
+
+    background:none;
+
+    border:none;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    font-size:16px;
 
 }
 
@@ -143,31 +247,7 @@ body{
 
     background:#2563eb;
 
-    transform:translateX(6px);
-
-}
-
-.sidebar button{
-
-    background:none;
-
-    border:none;
-
-    color:white;
-
-    font-size:16px;
-
-    width:100%;
-
-    text-align:left;
-
-    padding:15px;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    transition:.25s;
+    transform:translateX(8px);
 
 }
 
@@ -177,7 +257,7 @@ body{
 
 }
 
-/* Main */
+/* main */
 
 .main{
 
@@ -187,432 +267,146 @@ body{
 
 }
 
-.main.shift{
+.main.active{
 
-    margin-left:250px;
-
-}
-
-.title{
-
-    margin-top:60px;
-
-    font-size:44px;
-
-    font-weight:700;
+    margin-left:260px;
 
 }
 
-.subtitle{
+.hero{
 
-    color:#cbd5e1;
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    margin-top:80px;
+
+    margin-bottom:35px;
+
+}
+
+.hero h1{
+
+    font-size:48px;
+
+}
+
+.hero p{
 
     margin-top:8px;
 
-}
-
-/* Grid */
-
-.grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-
-    gap:25px;
-
-    margin-top:35px;
+    color:#cbd5e1;
 
 }
 
-/* Cards */
+.avatar{
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#2563eb,#9333ea);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    box-shadow:0 0 25px rgba(37,99,235,.6);
+
+}
+
+/* cards */
+
+.cards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:22px;
+
+}
 
 .card{
 
-    background:rgba(255,255,255,.08);
+background:rgba(255,255,255,.08);
 
-    backdrop-filter:blur(18px);
+backdrop-filter:blur(18px);
 
-    border:1px solid rgba(255,255,255,.08);
+padding:28px;
 
-    border-radius:22px;
+border-radius:24px;
 
-    padding:25px;
+border:1px solid rgba(255,255,255,.08);
 
-    transition:.3s;
+transition:.3s;
 
-    box-shadow:0 10px 35px rgba(0,0,0,.25);
+box-shadow:0 12px 30px rgba(0,0,0,.25);
 
 }
 
 .card:hover{
 
-    transform:translateY(-8px);
+transform:translateY(-10px);
 
-    box-shadow:0 20px 40px rgba(0,0,0,.45);
-
-}
-
-.card h3{
-
-    color:#cbd5e1;
-
-    font-size:15px;
+box-shadow:0 18px 45px rgba(37,99,235,.35);
 
 }
 
-.value{
+.card-icon{
 
-    font-size:40px;
+font-size:34px;
 
-    margin-top:10px;
-
-    font-weight:700;
+margin-bottom:15px;
 
 }
 
-/* Buttons */
+.card small{
 
-.actions{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:15px;
-
-    margin:40px 0;
+color:#cbd5e1;
 
 }
 
-.action-btn{
+.card h2{
 
-    background:linear-gradient(135deg,#2563eb,#4f46e5);
+margin-top:12px;
 
-    border:none;
-
-    color:white;
-
-    padding:14px 22px;
-
-    border-radius:14px;
-
-    cursor:pointer;
-
-    font-size:15px;
-
-    font-weight:600;
-
-    transition:.3s;
+font-size:40px;
 
 }
+window.addEventListener("load", () => {
 
-.action-btn:hover{
+    const cards = document.querySelectorAll(".card");
+    const panels = document.querySelectorAll(".panel");
 
-    transform:translateY(-4px);
+    [...cards, ...panels].forEach((item, index) => {
 
-    box-shadow:0 12px 30px rgba(37,99,235,.5);
+        item.style.opacity = "0";
+        item.style.transform = "translateY(25px)";
 
-}
+        setTimeout(() => {
+            item.style.transition = "all .6s ease";
+            item.style.opacity = "1";
+            item.style.transform = "translateY(0)";
+        }, index * 120);
 
-/* Panels */
+    });
 
-.section{
+});
 
-    display:grid;
+</script>
 
-    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
-
-    gap:25px;
-
-}
-
-.panel{
-
-    background:rgba(255,255,255,.08);
-
-    backdrop-filter:blur(18px);
-
-    border-radius:20px;
-
-    padding:25px;
-
-    border:1px solid rgba(255,255,255,.08);
-
-}
-
-.panel h3{
-
-    margin-bottom:18px;
-
-}
-
-.panel ul{
-
-    padding-left:20px;
-
-}
-
-.panel li{
-
-    margin-bottom:10px;
-
-}
-
-.tag{
-
-    display:inline-block;
-
-    padding:7px 12px;
-
-    background:#2563eb;
-
-    border-radius:30px;
-
-    margin:5px;
-
-    font-size:13px;
-
-}
-
-/* Mobile */
-
-@media(max-width:700px){
-
-    .title{
-
-        font-size:34px;
-
-    }
-
-    .main{
-
-        padding:25px;
-
-    }
-
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="menu-btn" onclick="toggleMenu()">
-☰
-</div>
-
-<div class="sidebar">
-
-<h2>🍽 MealMate</h2>
-
-<a href="/dashboard/dashboard">🏠 Dashboard</a>
-
-<a href="/dashboard/meals">🍔 Meals</a>
-
-<a href="planner.html">📅 Planner</a>
-
-<a href="grocery.html">🛒 Grocery</a>
-
-<a href="settings.html">⚙ Settings</a>
-
-<form action="/logout" method="post">
-<button type="submit">🚪 Logout</button>
-</form>
-
-</div>
-
-<div class="main">
-
-<div class="title">
-Dashboard
-</div>
-
-<div class="subtitle">
-Welcome <span th:text="${name}"></span>
-</div>
-
-<div class="subtitle">
-Your personalized nutrition overview
-</div>
-
-<div class="grid">
-
-<div class="card">
-<h3>Safe Meals</h3>
-<div class="value" th:text="${safeMeals}">0</div>
-</div>
-
-<div class="card">
-<h3>Restrictions</h3>
-<div class="value" th:text="${restrictionsCount}">0</div>
-</div>
-
-<div class="card">
-<h3>Weekly Cost</h3>
-<div class="value" th:text="${weeklyCost}">$0</div>
-</div>
-
-<div class="card">
-<h3>Saved Meals</h3>
-<div class="value" th:text="${savedMeals}">0</div>
-</div>
-
-</div>
-
-<div class="actions">
-
-<button class="action-btn">
-🍽 Find Meals
-</button>
-
-<button class="action-btn">
-📅 Planner
-</button>
-
-<button class="action-btn">
-🛒 Grocery List
-</button>
-
-</div>
-
-<div class="section">
-
-<div class="panel">
-
-<h3>🥗 Dietary Restrictions</h3>
-
-<p th:if="${#lists.isEmpty(restrictions)}">
-No restrictions selected yet.
-</p>
-
-<ul th:unless="${#lists.isEmpty(restrictions)}">
-
-<li
-th:ea<div class="panel">
-
-    <h3>📈 Quick Stats</h3>
-
-    <div style="display:flex;flex-direction:column;gap:18px;">
-
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-            <span>Safe Meal Progress</span>
-            <strong th:text="${safeMeals}">0</strong>
-        </div>
-
-        <div style="width:100%;height:10px;background:rgba(255,255,255,.15);border-radius:20px;">
-            <div
-                style="height:10px;width:75%;background:linear-gradient(90deg,#3b82f6,#06b6d4);border-radius:20px;">
-            </div>
-        </div>
-
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-            <span>Restrictions</span>
-            <strong th:text="${restrictionsCount}">0</strong>
-        </div>
-
-        <div style="width:100%;height:10px;background:rgba(255,255,255,.15);border-radius:20px;">
-            <div
-                style="height:10px;width:45%;background:linear-gradient(90deg,#8b5cf6,#6366f1);border-radius:20px;">
-            </div>
-        </div>
-
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-            <span>Meals Saved</span>
-            <strong th:text="${savedMeals}">0</strong>
-        </div>
-
-        <div style="width:100%;height:10px;background:rgba(255,255,255,.15);border-radius:20px;">
-            <div
-                style="height:10px;width:60%;background:linear-gradient(90deg,#22c55e,#14b8a6);border-radius:20px;">
-            </div>
-        </div>
-
-    </div>
-
-</div>
-
-</div>
-
-<br><br>
-
-<div class="section">
-
-    <div class="panel">
-
-        <h3>🔥 Today's Goal</h3>
-
-        <p style="line-height:1.8;color:#cbd5e1;">
-            Stay within your dietary restrictions and discover
-            new healthy meals tailored specifically for you.
-        </p>
-
-        <br>
-
-        <span class="tag">Healthy</span>
-        <span class="tag">Budget Friendly</span>
-        <span class="tag">Quick Meals</span>
-
-    </div>
-
-    <div class="panel">
-
-        <h3>✨ MealMate Tips</h3>
-
-        <ul style="line-height:2;">
-
-            <li>🥦 Eat a variety of vegetables.</li>
-
-            <li>💧 Stay hydrated throughout the day.</li>
-
-            <li>🍗 Include lean protein in every meal.</li>
-
-            <li>🛒 Plan meals before grocery shopping.</li>
-
-            <li>😴 Sleep 7–9 hours for better health.</li>
-
-        </ul>
-
-    </div>
-
-</div>
-
-</div>
-
-<script>
-
-const sidebar = document.querySelector(".sidebar");
-
-const main = document.querySelector(".main");
-
-function toggleMenu(){
-
-    sidebar.classList.toggle("open");
-
-    main.classList.toggle("shift");
-
-}
-
-document.addEventListener("click", function(event){
-
-    const menu = document.querySelector(".menu-btn");
-
-    if(
-        !sidebar.contains(event.target) &&
-        !menu.contains(event.target)
-    ){
-
-        sidebar.classList.remove("open");
-
-        main.classList.remove("shift");
-
-    }
-
-});ch="restriction : ${restrictions}"
-th:text="${restriction}">
-Restriction
-</li>
-
-</ul>
-
-</div>
+</body>
+</html>
