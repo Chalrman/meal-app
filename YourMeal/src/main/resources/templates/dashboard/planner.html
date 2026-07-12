@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<title>Planner | MealMate</title>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+
+}
+
+
+body{
+
+    background:#F8FAF8;
+
+    color:#1F2937;
+
+}
+
+
+
+/* =====================
+MENU BUTTON
+===================== */
+
+.menu{
+
+    position:fixed;
+
+    top:20px;
+
+    left:20px;
+
+    width:54px;
+
+    height:54px;
+
+    border-radius:16px;
+
+    background:white;
+
+    color:#5F8D4E;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    border:1px solid #E5E7EB;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+
+    z-index:10;
+
+}
+
+
+.menu:hover{
+
+    background:#5F8D4E;
+
+    color:white;
+
+}
+
+
+
+/* =====================
+SIDEBAR
+===================== */
+
+
+.sidebar{
+
+    position:fixed;
+
+    left:-260px;
+
+    top:0;
+
+    width:250px;
+
+    height:100vh;
+
+    background:white;
+
+    padding:30px;
+
+    border-right:1px solid #E5E7EB;
+
+    transition:.35s;
+
+    box-shadow:5px 0 25px rgba(0,0,0,.05);
+
+}
+
+
+.sidebar.active{
+
+    left:0;
+
+}
+
+
+
+.logo{
+
+    margin-top:70px;
+
+    margin-bottom:40px;
+
+    color:#5F8D4E;
+
+    font-size:30px;
+
+    font-weight:700;
+
+}
+
+
+
+.sidebar a{
+
+    display:block;
+
+    text-decoration:none;
+
+    color:#374151;
+
+    padding:15px;
+
+    margin-bottom:8px;
+
+    border-radius:12px;
+
+    transition:.2s;
+
+}
+
+
+
+.sidebar a:hover{
+
+    background:#EEF6EE;
+
+    color:#5F8D4E;
+
+}
+
+
+
+.sidebar button{
+
+    width:100%;
+
+    border:none;
+
+    background:none;
+
+    padding:15px;
+
+    text-align:left;
+
+    cursor:pointer;
+
+    color:#374151;
+
+    font-size:15px;
+
+}
+
+
+
+.sidebar button:hover{
+
+    color:#DC2626;
+
+}
+
+
+
+/* =====================
+MAIN
+===================== */
+
+
+.main{
+
+    padding:40px;
+
+}
+
+
+
+.header{
+
+    margin-top:80px;
+
+    margin-bottom:30px;
+
+}
+
+
+
+.header h1{
+
+    font-size:42px;
+
+}
+
+
+
+.header p{
+
+    margin-top:10px;
+
+    color:#6B7280;
+
+}
+
+
+
+/* =====================
+CALENDAR BOX
+===================== */
+
+
+.calendar-container{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:26px;
+
+    padding:30px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.05);
+
+}
+
+
+
+.calendar-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.calendar-top h2{
+
+    color:#5F8D4E;
+
+    font-size:28px;
+
+}
+
+
+
+.calendar-top button{
+
+    background:#EEF6EE;
+
+    border:none;
+
+    color:#5F8D4E;
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:20px;
+
+}
+
+
+
+.calendar-top button:hover{
+
+    background:#5F8D4E;
+
+    color:white;
+
+}
+/* =====================
+   WEEK DAYS
+===================== */
+
+
+.weekdays{
+
+    display:grid;
+
+    grid-template-columns:repeat(7,1fr);
+
+    text-align:center;
+
+    color:#6B7280;
+
+    font-weight:600;
+
+    margin-bottom:12px;
+
+}
+
+
+.weekdays div{
+
+    padding:12px;
+
+}
+
+
+
+/* =====================
+   CALENDAR DAYS
+===================== */
+
+
+.calendar-days{
+
+    display:grid;
+
+    grid-template-columns:repeat(7,1fr);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+
+
+.day{
+
+    min-height:130px;
+
+    border:1px solid #F0F0F0;
+
+    padding:12px;
+
+    background:white;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+
+
+.day:hover{
+
+    background:#FAFDF9;
+
+    transform:scale(1.02);
+
+}
+
+
+
+.empty{
+
+    background:#FAFAFA;
+
+    cursor:default;
+
+}
+
+
+
+.day-number{
+
+    font-weight:600;
+
+    color:#374151;
+
+}
+
+
+
+/* TODAY */
+
+.today{
+
+    background:#EEF6EE;
+
+    border:2px solid #5F8D4E;
+
+}
+
+
+
+.today .day-number{
+
+    color:#5F8D4E;
+
+}
+
+
+
+/* =====================
+   MEAL INSIDE DATE
+===================== */
+
+
+.meal-event{
+
+    margin-top:12px;
+
+    background:#5F8D4E;
+
+    color:white;
+
+    padding:8px;
+
+    border-radius:12px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+
+
+/* ADD BUTTON */
+
+.add-meal{
+
+    margin-top:15px;
+
+    width:100%;
+
+    border:none;
+
+    background:#F3F4F6;
+
+    color:#6B7280;
+
+    padding:8px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+
+
+.add-meal:hover{
+
+    background:#EEF6EE;
+
+    color:#5F8D4E;
+
+}
+
+
+
+/* =====================
+   LOWER PLANNER AREA
+===================== */
+
+
+.planner-grid{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:25px;
+
+    margin-top:30px;
+
+}
+
+
+
+.panel{
+
+    background:white;
+
+    border-radius:24px;
+
+    padding:25px;
+
+    border:1px solid #E5E7EB;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.05);
+
+}
+
+
+
+.panel h2{
+
+    margin-bottom:20px;
+
+}
+
+
+
+/* UPCOMING MEALS */
+
+
+.upcoming-card{
+
+    background:#F8FAF8;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-bottom:12px;
+
+    border-left:4px solid #5F8D4E;
+
+}
+
+
+
+.upcoming-card strong{
+
+    color:#5F8D4E;
+
+}
+
+
+
+/* =====================
+ RESPONSIVE
+===================== */
+
+
+@media(max-width:900px){
+
+
+    .planner-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .calendar-days{
+
+        overflow-x:auto;
+
+    }
+
+
+}
+
+
+
+@media(max-width:700px){
+
+
+    .main{
+
+        padding:25px;
+
+    }
+
+
+    .header h1{
+
+        font-size:34px;
+
+    }
+
+
+    .day{
+
+        min-height:90px;
+
+        font-size:12px;
+
+    }
+
+
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="menu" onclick="toggleSidebar()">
+
+☰
+
+</div>
+
+
+
+<div class="sidebar">
+
+
+<div class="logo">
+
+MealMate
+
+</div>
+
+
+
+<a href="/dashboard/dashboard">
+Dashboard
+</a>
+
+
+<a href="/dashboard/meals">
+Meals
+</a>
+
+
+<a href="/dashboard/planner">
+Planner
+</a>
+
+
+<a href="/dashboard/grocery">
+Grocery
+</a>
+
+
+<a href="/dashboard/settings">
+Settings
+</a>
+
+
+
+<form action="/logout" method="post">
+
+<button>
+Logout
+</button>
+
+</form>
+
+
+</div>
+
+
+
+
+
+<div class="main">
+
+
+<div class="header">
+
+<h1>
+Meal Planner
+</h1>
+
+<p>
+Organize your meals and plan ahead.
+</p>
+
+</div>
+
+
+
+
+
+<div class="calendar-container">
+
+
+<div class="calendar-top">
+
+
+<button id="previous">
+←
+</button>
+
+
+
+<h2 id="monthYear">
+Month Year
+</h2>
+
+
+
+<button id="next">
+→
+</button>
+
+
+</div>
+
+
+
+<div class="weekdays">
+
+<div>Sun</div>
+<div>Mon</div>
+<div>Tue</div>
+<div>Wed</div>
+<div>Thu</div>
+<div>Fri</div>
+<div>Sat</div>
+
+</div>
+
+
+
+<div class="calendar-days" id="calendarDays">
+
+</div>
+
+
+</div>
+<div class="planner-grid">
+
+
+<div class="panel">
+
+
+<h2>
+📅 Upcoming Meals
+</h2>
+
+
+
+<div class="upcoming-card">
+
+<strong>
+Tomorrow
+</strong>
+
+<p>
+Chicken Bowl
+</p>
+
+</div>
+
+
+
+<div class="upcoming-card">
+
+<strong>
+Friday
+</strong>
+
+<p>
+Turkey Wrap
+</p>
+
+</div>
+
+
+
+<div class="upcoming-card">
+
+<strong>
+Sunday
+</strong>
+
+<p>
+Vegetable Pasta
+</p>
+
+</div>
+
+
+
+</div>
+
+
+
+
+<div class="panel">
+
+
+<h2>
+🌿 Planner Tips
+</h2>
+
+
+<p style="color:#6B7280;line-height:1.7;">
+
+Planning your meals ahead helps you
+save money, reduce waste, and stay
+consistent with your goals.
+
+</p>
+
+
+
+<br>
+
+
+
+<div class="meal-event">
+
+Healthy planning starts here
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+<script>
+
+
+/* =====================
+   SIDEBAR
+===================== */
+
+
+const sidebar = document.querySelector(".sidebar");
+
+
+const menu = document.querySelector(".menu");
+
+
+
+function toggleSidebar(){
+
+    sidebar.classList.toggle("active");
+
+}
+
+
+
+
+document.addEventListener("click",(event)=>{
+
+
+    if(
+
+        !sidebar.contains(event.target)
+
+        &&
+
+        !menu.contains(event.target)
+
+    ){
+
+        sidebar.classList.remove("active");
+
+    }
+
+
+});
+
+
+
+
+/* =====================
+   CALENDAR
+===================== */
+
+
+const calendarDays = document.getElementById("calendarDays");
+
+const monthYear = document.getElementById("monthYear");
+
+
+let currentDate = new Date();
+
+
+
+
+
+function generateCalendar(){
+
+
+    calendarDays.innerHTML="";
+
+
+
+    const year = currentDate.getFullYear();
+
+
+    const month = currentDate.getMonth();
+
+
+
+    const firstDay = new Date(
+        year,
+        month,
+        1
+    ).getDay();
+
+
+
+    const daysInMonth = new Date(
+        year,
+        month + 1,
+        0
+    ).getDate();
+
+
+
+    monthYear.textContent =
+        currentDate.toLocaleDateString(
+            "en-US",
+            {
+                month:"long",
+                year:"numeric"
+            }
+        );
+
+
+
+
+
+    // empty spaces before first day
+
+    for(let i=0;i<firstDay;i++){
+
+
+        let empty =
+        document.createElement("div");
+
+
+        empty.className="day empty";
+
+
+        calendarDays.appendChild(empty);
+
+
+    }
+
+
+
+
+
+    // actual days
+
+    for(let day=1; day<=daysInMonth; day++){
+
+
+
+        let dayBox =
+        document.createElement("div");
+
+
+        dayBox.className="day";
+
+
+
+        let number =
+        document.createElement("div");
+
+
+
+        number.className="day-number";
+
+
+        number.textContent=day;
+
+
+
+        dayBox.appendChild(number);
+
+
+
+
+
+        const today = new Date();
+
+
+
+        if(
+
+            day === today.getDate()
+
+            &&
+
+            month === today.getMonth()
+
+            &&
+
+            year === today.getFullYear()
+
+        ){
+
+
+            dayBox.classList.add("today");
+
+
+        }
+
+
+
+
+
+        let button =
+        document.createElement("button");
+
+
+
+        button.className="add-meal";
+
+
+        button.textContent="+ Meal";
+
+
+
+        button.onclick=(e)=>{
+
+
+            e.stopPropagation();
+
+
+
+            addMeal(dayBox,day);
+
+
+        };
+
+
+
+        dayBox.appendChild(button);
+
+
+
+        calendarDays.appendChild(dayBox);
+
+
+    }
+
+
+}
+
+
+
+
+function addMeal(dayBox,day){
+
+
+    let meal =
+    prompt(
+        "Enter meal for day " + day
+    );
+
+
+
+    if(meal){
+
+
+        let event =
+        document.createElement("div");
+
+
+
+        event.className="meal-event";
+
+
+        event.textContent=meal;
+
+
+
+        dayBox.appendChild(event);
+
+
+    }
+
+
+}
+
+
+
+
+
+document.getElementById("previous")
+.onclick=function(){
+
+
+    currentDate.setMonth(
+        currentDate.getMonth()-1
+    );
+
+
+    generateCalendar();
+
+
+};
+
+
+
+
+
+document.getElementById("next")
+.onclick=function(){
+
+
+    currentDate.setMonth(
+        currentDate.getMonth()+1
+    );
+
+
+    generateCalendar();
+
+
+};
+
+
+
+
+generateCalendar();
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
