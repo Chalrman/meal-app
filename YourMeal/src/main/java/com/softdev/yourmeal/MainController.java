@@ -38,6 +38,7 @@ public class MainController {
     public String login() {
         return "login";
     }
+ 
 
     @PostMapping("/login")
     public String loginUser(
@@ -286,6 +287,18 @@ public class MainController {
         }
 
         return "dashboard/dashboard";
+    }
+    @GetMapping("/dashboard/planner")
+    public String planner(HttpSession session, Model model){
+
+        AppUser user = getLoggedInUser(session);
+
+        if(user == null){
+            return "redirect:/";
+        }
+
+
+        return "dashboard/planner";
     }
 
 }
