@@ -75,6 +75,54 @@ public class GeminiMealRecommendationClient {
         }
     }
 
+    public GroceryListResult recommendIngredients(List<String> savedMealNames) {
+        if (savedMealNames == null || savedMealNames.isEmpty()) {
+            return new GroceryListResult(List.of(), "Save meals before updating your grocery list.");
+        }
+
+        if (apiKey == null || apiKey.isBlank()) {
+            return new GroceryListResult(List.of(), "GEMINI_API_KEY is missing. Set it before starting the app.");
+        }
+
+        try {
+            String requestJson = objectMapper.writeValueAsString(buildIngredientsRequest(savedMealNames));
+            String responseJson = restClient.post()
+                    .uri("/models/{model}:generateContent", model)
+                    .header("x-goog-api-key", apiKey)
+                    .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(requestJson)
+                    .retrieve()
+                    .body(String.class);
+
+            String jsonText = extractGeneratedText(objectMapper.readTree(responseJson));
+            if (jsonText.isBlank()) {
+                return new GroceryListResult(List.of(), "Gemini returned no grocery list text.");
+            }
+
+            JsonNode ingredientsNode = objectMapper.readTree(jsonText).path("ingredients");
+            List<String> ingredients = new ArrayList<>();
+            for (JsonNode ingredient : ingredientsNode) {
+                String ingredientText = ingredient.asText();
+                if (!ingredientText.isBlank()) {
+                    ingredients.add(ingredientText);
+                }
+            }
+
+            if (ingredients.isEmpty()) {
+                return new GroceryListResult(List.of(), "Gemini returned a response, but it did not include ingredients.");
+            }
+
+            return new GroceryListResult(ingredients, "");
+        } catch (RestClientResponseException ex) {
+            return new GroceryListResult(List.of(), "Gemini API error: " + extractApiErrorMessage(ex.getResponseBodyAsString()));
+        } catch (RuntimeException ex) {
+            return new GroceryListResult(List.of(), "Gemini request failed: " + ex.getMessage());
+        } catch (Exception ex) {
+            return new GroceryListResult(List.of(), "Gemini response could not be parsed: " + ex.getMessage());
+        }
+    }
+
     private Map<String, Object> buildRequest(DietaryProfile profile, List<String> restrictions) {
         return Map.of(
                 "systemInstruction", Map.of("parts", List.of(Map.of("text", """
@@ -103,6 +151,26 @@ public class GeminiMealRecommendationClient {
                                 "required", List.of("recommendations"))));
     }
 
+    private Map<String, Object> buildIngredientsRequest(List<String> savedMealNames) {
+        return Map.of(
+                "systemInstruction", Map.of("parts", List.of(Map.of("text", """
+                        You create grocery lists for a meal planning app.
+                        Infer practical ingredients needed for the saved meals.
+                        Combine duplicate ingredients and keep each item short.
+                        Return ingredients only, not cooking instructions.
+                        """))),
+                "contents", List.of(Map.of("parts", List.of(Map.of("text", buildIngredientsPrompt(savedMealNames))))),
+                "generationConfig", Map.of(
+                        "responseMimeType", "application/json",
+                        "responseJsonSchema", Map.of(
+                                "type", "object",
+                                "properties", Map.of(
+                                        "ingredients", Map.of(
+                                                "type", "array",
+                                                "items", Map.of("type", "string"))),
+                                "required", List.of("ingredients"))));
+    }
+
     private String buildProfilePrompt(DietaryProfile profile, List<String> restrictions) {
         String goal = profile.getGoal() == null || profile.getGoal().isBlank()
                 ? "balancedNutrition"
@@ -117,6 +185,14 @@ public class GeminiMealRecommendationClient {
                 Restrictions and health considerations: %s
                 Output 3 or 4 varied meals. Tags should be comma-separated short labels.
                 """.formatted(goal, restrictionText);
+    }
+
+    private String buildIngredientsPrompt(List<String> savedMealNames) {
+        return """
+                Build a grocery list for these saved meals:
+                %s
+                Return 8 to 15 common ingredient items.
+                """.formatted(String.join(", ", savedMealNames));
     }
 
     private String extractGeneratedText(JsonNode response) {
