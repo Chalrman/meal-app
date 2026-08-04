@@ -1,251 +1,830 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Intro Page</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: white;
-            text-align: center;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* NAVBAR */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-        }
+<title>MealMate</title>
 
-        .logo img {
-            width: 80px;
-            height: 80px;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        .nav-links a {
-            text-decoration: none;
-            color: black;
-            font-size: 18px;
-        }
 
-        .nav-links .btn {
-            background-color: black;
-            color: white;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 18px;
-        }
+<style>
 
-        .btn:hover {
-            background-color: #333;
-        }
+/* ==========================
+   RESET
+========================== */
 
-        /* HERO */
-        .hero {
-            margin-top: 80px;
-            padding: 20px;
-        }
+*{
 
-        .title {
-            font-size: 60px;
-            font-weight: bold;
-            max-width: 750px;
-            margin: 0 auto 20px;
-        }
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 
-        .subheading {
-            font-size: 22px;
-            max-width: 650px;
-            margin: 0 auto;
-            opacity: 0.8;
-        }
+}
 
-        .hero-btn {
-            margin-top: 40px;
-        }
 
-        .hero-btn a {
-            display: inline-block;
-            background-color: black;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 18px;
-        }
+body{
 
-        .hero-btn a:hover {
-            background-color: #333;
-        }
+    background:#F8FAF8;
 
-        /* BANNER */
-        .banner {
-            display: flex;
-            align-items: stretch;
-            justify-content: center;
-            gap: 30px;
-            margin: 80px 50px;
-        }
+    color:#1F2937;
 
-        .banner img {
-            width: 45%;
-            border-radius: 12px;
-            object-fit: cover;
-            transition: opacity 0.4s ease;
-        }
+    min-height:100vh;
 
-        /* DOTS */
-        .middlebuttons {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-        }
+}
 
-        .circle-btn {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            border: 2px solid black;
-            background: white;
-            cursor: pointer;
-            transition: 0.2s;
-        }
 
-        .circle-btn.active {
-            background: black;
-        }
+/* ==========================
+   NAVBAR
+========================== */
 
-        /* TEXT BOX */
-        .textbanner {
-            flex: 1;
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            padding: 30px;
 
-            font-size: 18px;
-            line-height: 1.6;
+nav{
 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    display:flex;
 
-            text-align: left;
-            transition: opacity 0.4s ease;
-        }
-    </style>
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:30px 60px;
+
+}
+
+
+.logo{
+
+    font-size:32px;
+
+    font-weight:700;
+
+    color:#5F8D4E;
+
+}
+
+
+.nav-links{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+
+.nav-links a{
+
+    text-decoration:none;
+
+    color:#374151;
+
+    font-weight:500;
+
+}
+
+
+/* ==========================
+   BUTTON
+========================== */
+
+
+.action{
+
+    background:#5F8D4E;
+
+    color:white !important;
+
+    padding:14px 24px;
+
+    border-radius:14px;
+
+    border:none;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.25s;
+
+    text-decoration:none;
+
+}
+
+
+.action:hover{
+
+    background:#4F7641;
+
+    transform:translateY(-3px);
+
+}
+
+
+/* ==========================
+   MAIN
+========================== */
+
+
+.main{
+
+    padding:20px 60px;
+
+}
+
+
+/* ==========================
+   HERO
+========================== */
+
+
+.hero{
+
+    background:white;
+
+    border-radius:28px;
+
+    padding:55px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:30px;
+
+    border:1px solid #E5E7EB;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.05);
+
+    animation:fade .7s ease;
+
+}
+
+
+.hero h1{
+
+    font-size:52px;
+
+    line-height:1.2;
+
+    font-weight:700;
+
+}
+
+
+.hero p{
+
+    margin-top:18px;
+
+    color:#6B7280;
+
+    font-size:18px;
+
+    max-width:650px;
+
+    line-height:1.7;
+
+}
+
+
+.emoji{
+
+    font-size:100px;
+
+}
+
+
+/* ==========================
+   FEATURES
+========================== */
+
+
+.grid{
+
+    margin-top:35px;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:22px;
+
+}
+
+
+
+.card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:22px;
+
+    border:1px solid #E5E7EB;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.05);
+
+    transition:.3s;
+
+}
+
+
+.card:hover{
+
+    transform:translateY(-7px);
+
+    box-shadow:0 20px 35px rgba(95,141,78,.15);
+
+}
+
+
+.card h2{
+
+    margin-bottom:12px;
+
+    color:#5F8D4E;
+
+}
+
+
+.card p{
+
+    color:#6B7280;
+
+    line-height:1.7;
+
+}
+
+
+/* ==========================
+   SLIDER PANEL
+========================== */
+
+
+.panel{
+
+    margin-top:35px;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:24px;
+
+    border:1px solid #E5E7EB;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.05);
+
+}
+
+
+.banner{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:30px;
+
+}
+
+
+.banner img{
+
+    width:45%;
+
+    height:350px;
+
+    object-fit:cover;
+
+    border-radius:20px;
+
+    transition:.4s;
+
+}
+
+
+/* DOTS */
+
+
+.middlebuttons{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+.circle-btn{
+
+    width:16px;
+
+    height:16px;
+
+    border-radius:50%;
+
+    border:2px solid #5F8D4E;
+
+    cursor:pointer;
+
+}
+
+
+.circle-btn.active{
+
+    background:#5F8D4E;
+
+}
+
+
+/* TEXT */
+
+
+.textbanner{
+
+    flex:1;
+
+    background:#F8FAF8;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    color:#374151;
+
+    line-height:1.8;
+
+    font-size:17px;
+
+    transition:.4s;
+
+}
+
+
+
+/* ==========================
+   ANIMATION
+========================== */
+
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(30px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+
+/* ==========================
+   MOBILE
+========================== */
+
+
+@media(max-width:900px){
+
+
+nav{
+
+padding:25px;
+
+flex-direction:column;
+
+gap:20px;
+
+}
+
+
+.main{
+
+padding:20px;
+
+}
+
+
+.hero{
+
+flex-direction:column;
+
+text-align:center;
+
+}
+
+
+.hero h1{
+
+font-size:36px;
+
+}
+
+
+.banner{
+
+flex-direction:column;
+
+}
+
+
+.banner img{
+
+width:100%;
+
+}
+
+
+.middlebuttons{
+
+flex-direction:row;
+
+}
+
+
+}
+
+
+</style>
+
 </head>
+
 
 <body>
 
-<!-- NAVBAR -->
-<nav>
-    <div class="logo">
-        <a href="/">
-        <img src="https://cdn.britannica.com/98/235798-050-3C3BA15D/Hamburger-and-french-fries-paper-box.jpg">
-        </a>
-    </div>
 
-    <div class="nav-links">
-        <!--         <a href="about.html">About</a> -->
-        <a href="/login">Sign In</a>
-        <a href="/register">Get Started</a>
-        <form action="/dashboard/dashboard" method="post"><button class="btn" type="submit">Home</button></form>
-    </div>
+
+<nav>
+
+
+<div class="logo">
+
+🍽 MealMate
+
+</div>
+
+
+<div class="nav-links">
+
+
+<a href="/login">
+
+Sign In
+
+</a>
+
+
+<a class="action" href="/register">
+
+Get Started
+
+</a>
+
+
+<form action="/dashboard/dashboard" method="post">
+
+<button class="action">
+
+Home
+
+</button>
+
+</form>
+
+
+</div>
+
+
 </nav>
 
+
+
+
+
+<div class="main">
+
+
 <!-- HERO -->
+
+
 <div class="hero">
-    <div class="title">
-        Eat better with your dietary restrictions
-    </div>
 
-    <div class="subheading">
-        Get personalized meal recommendations, ingredient substitutions, and grocery options tailored to your needs.
-    </div>
 
-    <div class="hero-btn">
-        <a href="/register">Get Started</a>
-    </div>
+<div>
+
+
+<h1>
+
+Eat Better With Your Dietary Restrictions
+
+</h1>
+
+
+<p>
+
+Get personalized meal recommendations, ingredient substitutions,
+and grocery options tailored specifically to your needs.
+
+</p>
+
+
+<br>
+
+
+<a class="action" href="/register">
+
+Start Your Journey →
+
+</a>
+
+
 </div>
 
-<!-- BANNER -->
+
+
+<div class="emoji">
+
+🥗
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- FEATURES -->
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h2>
+
+🥗 Personalized Meals
+
+</h2>
+
+<p>
+
+Discover recipes designed around your allergies,
+diet preferences, and health goals.
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+
+🔄 Smart Swaps
+
+</h2>
+
+<p>
+
+Replace ingredients easily with alternatives
+that fit your lifestyle.
+
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h2>
+
+🛒 Grocery Made Easy
+
+</h2>
+
+<p>
+
+Generate shopping lists automatically from
+your meal recommendations.
+
+</p>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- SLIDER -->
+
+
+<div class="panel">
+
+
 <div class="banner">
 
-    <img id="bannerImg"
-         src="https://images.pexels.com/photos/3184195/pexels-photo-3184195.jpeg?auto=compress&cs=tinysrgb&w=1000">
 
-    <!-- DOTS -->
-    <div class="middlebuttons">
-        <div class="circle-btn active" onclick="changeSlide(0)"></div>
-        <div class="circle-btn" onclick="changeSlide(1)"></div>
-        <div class="circle-btn" onclick="changeSlide(2)"></div>
-    </div>
+<img id="bannerImg"
+src="https://images.pexels.com/photos/3184195/pexels-photo-3184195.jpeg?auto=compress&cs=tinysrgb&w=1000">
 
-    <!-- TEXT -->
-    <div class="textbanner" id="bannerText">
-        Discover meals tailored to your unique dietary needs. Whether you're avoiding allergens, managing health conditions, or simply trying to eat healthier, MealMate helps you find recipes and meal ideas that work for you.
-    </div>
+
+
+<div class="middlebuttons">
+
+
+<div class="circle-btn active"
+onclick="changeSlide(0)">
+</div>
+
+
+<div class="circle-btn"
+onclick="changeSlide(1)">
+</div>
+
+
+<div class="circle-btn"
+onclick="changeSlide(2)">
+</div>
+
 
 </div>
 
+
+
+<div class="textbanner" id="bannerText">
+
+
+Discover meals tailored to your unique dietary needs.
+MealMate helps you find recipes and meal ideas that work for you.
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
 <script>
-    const slides = [
-        {
-            img: "https://images.pexels.com/photos/3184195/pexels-photo-3184195.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            text: "Discover meals tailored to your dietary needs. MealMate helps you find recipes, ingredient swaps, and grocery suggestions."
-        },
-        {
-            img: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            text: "Smart ingredient substitutions let you enjoy meals even with allergies or restrictions."
-        },
-        {
-            img: "https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            text: "Automatically generate grocery lists and weekly meal plans in seconds."
-        }
-    ];
 
-    let current = 0;
 
-    function changeSlide(i) {
-        update(i);
-        current = i;
-    }
+const slides=[
 
-    /* AUTO SLIDE */
-    setInterval(() => {
-        current = (current + 1) % slides.length;
-        update(current);
-    }, 5000);
 
-    function update(i) {
-        const img = document.getElementById("bannerImg");
-        const text = document.getElementById("bannerText");
+{
 
-        img.style.opacity = 0;
-        text.style.opacity = 0;
+img:"https://images.pexels.com/photos/3184195/pexels-photo-3184195.jpeg?auto=compress&cs=tinysrgb&w=1000",
 
-        setTimeout(() => {
-            img.src = slides[i].img;
-            text.innerText = slides[i].text;
+text:"Discover meals tailored to your dietary needs. MealMate creates personalized recipes and suggestions."
 
-            img.style.opacity = 1;
-            text.style.opacity = 1;
-        }, 250);
+},
 
-        document.querySelectorAll(".circle-btn").forEach((b, idx) => {
-            b.classList.toggle("active", idx === i);
-        });
-    }
+
+
+{
+
+img:"https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1000",
+
+text:"Smart ingredient substitutions help you enjoy meals while following your restrictions."
+
+},
+
+
+
+{
+
+img:"https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=1000",
+
+text:"Create grocery lists and meal plans quickly with MealMate."
+
+}
+
+
+];
+
+
+let current=0;
+
+
+
+function changeSlide(i){
+
+
+update(i);
+
+current=i;
+
+
+}
+
+
+
+setInterval(()=>{
+
+
+current=(current+1)%slides.length;
+
+
+update(current);
+
+
+},5000);
+
+
+
+
+
+function update(i){
+
+
+const img=document.getElementById("bannerImg");
+
+const text=document.getElementById("bannerText");
+
+
+
+img.style.opacity=0;
+
+text.style.opacity=0;
+
+
+
+setTimeout(()=>{
+
+
+img.src=slides[i].img;
+
+text.innerText=slides[i].text;
+
+
+img.style.opacity=1;
+
+text.style.opacity=1;
+
+
+},300);
+
+
+
+document.querySelectorAll(".circle-btn").forEach((btn,index)=>{
+
+
+btn.classList.toggle("active",index===i);
+
+
+});
+
+
+}
+
+
+
 </script>
 
+
 </body>
+
 </html>
