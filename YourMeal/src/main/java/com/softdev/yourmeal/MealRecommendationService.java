@@ -20,6 +20,10 @@ public class MealRecommendationService {
         return geminiMealRecommendationClient.recommendMeals(profile, restrictions);
     }
 
+    public GroceryListResult recommendIngredients(List<String> savedMealNames) {
+        return geminiMealRecommendationClient.recommendIngredients(savedMealNames);
+    }
+
     public List<String> describeRestrictions(DietaryProfile profile) {
         List<String> restrictions = new ArrayList<>();
 
