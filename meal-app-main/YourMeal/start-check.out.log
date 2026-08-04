@@ -1,0 +1,91 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.softdev:YourMeal:jar:0.0.1-SNAPSHOT
+[WARNING] 'dependencies.dependency.version' for org.testng:testng:jar is either LATEST or RELEASE (both of them are being deprecated) @ line 67, column 22
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------------< com.softdev:YourMeal >------------------------
+[INFO] Building YourMeal 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:4.0.6:run (default-cli) > test-compile @ YourMeal >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ YourMeal ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 11 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ YourMeal ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ YourMeal ---
+[INFO] Copying 1 resource from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ YourMeal ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:4.0.6:run (default-cli) < test-compile @ YourMeal <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:4.0.6:run (default-cli) @ YourMeal ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.6)
+
+2026-08-04T02:12:22.568-05:00  INFO 28256 --- [YourMeal] [           main] c.softdev.yourmeal.YourMealApplication   : Starting YourMealApplication using Java 23 with PID 28256 (C:\Users\ariol\Downloads\meal-app-main\meal-app-main\YourMeal\target\classes started by ariol in C:\Users\ariol\Downloads\meal-app-main\meal-app-main\YourMeal)
+2026-08-04T02:12:22.571-05:00  INFO 28256 --- [YourMeal] [           main] c.softdev.yourmeal.YourMealApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-08-04T02:12:22.956-05:00  INFO 28256 --- [YourMeal] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-04T02:12:22.999-05:00  INFO 28256 --- [YourMeal] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 37 ms. Found 3 JPA repository interfaces.
+2026-08-04T02:12:23.266-05:00  INFO 28256 --- [YourMeal] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8090 (http)
+2026-08-04T02:12:23.274-05:00  INFO 28256 --- [YourMeal] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-08-04T02:12:23.275-05:00  INFO 28256 --- [YourMeal] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.21]
+2026-08-04T02:12:23.311-05:00  INFO 28256 --- [YourMeal] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 700 ms
+2026-08-04T02:12:23.400-05:00  INFO 28256 --- [YourMeal] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-08-04T02:12:23.427-05:00  INFO 28256 --- [YourMeal] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-08-04T02:12:23.673-05:00  INFO 28256 --- [YourMeal] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-04T02:12:23.695-05:00  INFO 28256 --- [YourMeal] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-08-04T02:12:23.814-05:00  INFO 28256 --- [YourMeal] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:C:/Users/ariol/Downloads/meal-app-main/meal-app-main/YourMeal/data/yourmeal user=SA
+2026-08-04T02:12:23.819-05:00  INFO 28256 --- [YourMeal] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-08-04T02:12:23.833-05:00  WARN 28256 --- [YourMeal] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-04T02:12:23.847-05:00  INFO 28256 --- [YourMeal] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:file:C:/Users/ariol/Downloads/meal-app-main/meal-app-main/YourMeal/data/yourmeal]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: YOURMEAL/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-08-04T02:12:24.345-05:00  INFO 28256 --- [YourMeal] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-04T02:12:24.385-05:00  INFO 28256 --- [YourMeal] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-04T02:12:24.564-05:00  INFO 28256 --- [YourMeal] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-08-04T02:12:24.711-05:00  INFO 28256 --- [YourMeal] [           main] o.s.b.w.a.WelcomePageHandlerMapping      : Adding welcome page template: index
+2026-08-04T02:12:24.886-05:00  INFO 28256 --- [YourMeal] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8090 (http) with context path '/'
+2026-08-04T02:12:24.892-05:00  INFO 28256 --- [YourMeal] [           main] c.softdev.yourmeal.YourMealApplication   : Started YourMealApplication in 2.607 seconds (process running for 2.829)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.242 s
+[INFO] Finished at: 2026-08-04T02:12:40-05:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:4.0.6:run (default-cli) on project YourMeal: Process terminated with exit code: -1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
