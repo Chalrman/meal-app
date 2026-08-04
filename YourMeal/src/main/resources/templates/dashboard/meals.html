@@ -274,7 +274,9 @@ body{
 
     grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
 
-    gap:25px;
+    gap:38px;
+
+    margin-top:28px;
 
 }
 
@@ -470,6 +472,86 @@ body{
 
 }
 
+.save-btn:disabled{
+
+    opacity:.75;
+
+    cursor:wait;
+
+    transform:none;
+
+}
+
+.ai-loading{
+
+    display:none;
+
+    max-width:520px;
+
+    margin:18px auto 0;
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:14px;
+
+    padding:14px 16px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.05);
+
+}
+
+.ai-loading.active{
+
+    display:block;
+
+}
+
+.ai-loading p{
+
+    color:#6B7280;
+
+    font-size:14px;
+
+    margin-bottom:10px;
+
+}
+
+.loading-track{
+
+    height:10px;
+
+    background:#EEF6EE;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+}
+
+.loading-bar{
+
+    height:100%;
+
+    width:45%;
+
+    border-radius:50px;
+
+    background:#5F8D4E;
+
+    animation:loadingBar 1.2s ease-in-out infinite;
+
+}
+
+@keyframes loadingBar{
+
+    0%{ transform:translateX(-110%); }
+
+    100%{ transform:translateX(240%); }
+
+}
+
 
 
 /* ======================
@@ -549,7 +631,7 @@ Planner
 </a>
 
 
-<a href="grocery.html">
+<a href="/dashboard/grocery">
 Grocery
 </a>
 
@@ -588,13 +670,107 @@ Choose Your Meals
 
 
 <p>
-Select meals you would like to save for later.
+Here are the meals you have saved for later.
 </p>
 
 
 </div>
 
 
+
+
+<form action="/dashboard/meals/recommend" method="post" class="ai-form">
+
+
+
+<div class="save-area">
+
+<button class="save-btn" type="submit">
+
+Find More Meal Suggestions
+
+</button>
+
+</div>
+
+<div class="ai-loading">
+
+<p>
+Generating meal suggestions...
+</p>
+
+<div class="loading-track">
+
+<div class="loading-bar">
+</div>
+
+</div>
+
+</div>
+
+
+
+</form>
+
+
+
+<div class="meal-grid" th:if="${hasSavedMeals and !showRecommendations}">
+
+
+
+<div
+class="meal-card"
+th:each="meal : ${savedMeals}">
+
+
+
+<div class="meal-top">
+
+
+<h3
+th:text="${meal.mealNames}">
+Saved Meal
+</h3>
+
+
+
+</div>
+
+
+
+<p>
+Saved to your meal list.
+</p>
+
+
+
+<div class="tags">
+
+
+<span class="tag">
+Saved
+</span>
+
+
+</div>
+
+
+</div>
+</div>
+
+
+<div
+class="empty-card"
+th:unless="${hasSavedMeals or showRecommendations}">
+
+<p>
+No saved meals yet. Click the button above when you want new suggestions.
+</p>
+
+</div>
+
+
+<div th:if="${showRecommendations}">
 
 
 <form action="/dashboard/meals" method="post">
@@ -692,6 +868,9 @@ Save Selected Meals
 </div>
 
 
+</div>
+
+
 
 <script>
 
@@ -714,6 +893,34 @@ function toggleSidebar(){
 
 
 }
+
+
+
+document.querySelectorAll(".ai-form").forEach((form)=>{
+
+    form.addEventListener("submit",()=>{
+
+        const button = form.querySelector("button[type='submit']");
+
+        const loading = form.querySelector(".ai-loading");
+
+        if(button){
+
+            button.disabled = true;
+
+            button.textContent = "Working...";
+
+        }
+
+        if(loading){
+
+            loading.classList.add("active");
+
+        }
+
+    });
+
+});
 
 
 

@@ -771,7 +771,7 @@ hr{
 
 <a href="/dashboard/planner">📅 Planner</a>
 
-<a href="#">🛒 Grocery</a>
+<a href="/dashboard/grocery">🛒 Grocery</a>
 
 <a href="#">⚙ Settings</a>
 
@@ -826,20 +826,6 @@ Track your nutrition, discover meals, and stay healthy.
 
     <div class="card">
 
-        <h3>🍽 Safe Meals</h3>
-
-        <div class="value" th:text="${safeMeals}">
-            0
-        </div>
-
-        <p style="color:#94a3b8;margin-top:12px;">
-            Meals matching your dietary restrictions.
-        </p>
-
-    </div>
-
-    <div class="card">
-
         <h3>🚫 Restrictions</h3>
 
         <div class="value" th:text="${restrictionsCount}">
@@ -870,7 +856,7 @@ Track your nutrition, discover meals, and stay healthy.
 
         <h3>⭐ Saved Meals</h3>
 
-        <div class="value" th:text="${savedMeals}">
+        <div class="value" th:text="${savedMealsCount}">
             0
         </div>
 
@@ -887,18 +873,21 @@ Track your nutrition, discover meals, and stay healthy.
 <!-- ===================== -->
 
 <div class="actions">
-
-    <button class="action">
-        🔍 Find Meals
-    </button>
+    <form action="/dashboard/meals/recommend" method="post">
+        <button class="action" type="submit">
+            🔍 Find Meals
+        </button>
+    </form>
 
     <button class="action">
         📅 Meal Planner
     </button>
 
-    <button class="action">
-        🛒 Grocery List
-    </button>
+    <form action="/dashboard/grocery" method="post">
+        <button class="action">
+            🛒 Grocery List
+        </button>
+    </form>
 
 </div>
 
@@ -990,56 +979,20 @@ Budget Tracking
 
 <div class="section">
 
-    <!-- Recommended Meals -->
+    <!-- Saved Meals -->
     <div class="panel">
 
-        <h2>🍔 Recommended Meals</h2>
+        <h2>🍔 Saved Meals</h2>
 
-        <p
-            th:unless="${hasRecommendations}"
-            th:text="${recommendationStatus}"
-            style="color:#cbd5e1;">
-            Recommendations unavailable.
-        </p>
+        <ul th:unless="${#lists.isEmpty(savedMeals)}">
+            <li th:each="meal, mealStat : ${savedMeals}"
+                th:if="${mealStat.index &lt; 5}"
+                th:text="${meal.mealNames}">
+                Saved Meal
+            </li>
+        </ul>
 
-        <div
-            th:if="${hasRecommendations}">
-
-            <div
-                th:each="meal : ${recommendations}"
-                style="
-                background:rgba(255,255,255,.05);
-                border-radius:15px;
-                padding:18px;
-                margin-bottom:18px;">
-
-                <h3
-                    style="margin-bottom:10px;"
-                    th:text="${meal.name()}">
-                    Meal Name
-                </h3>
-
-                <p
-                    style="color:#cbd5e1;"
-                    th:text="${meal.reason()}">
-                    Meal description
-                </p>
-
-                <div style="margin-top:12px;">
-
-                    <span
-                        class="tag"
-                        th:each="tag : ${#strings.arraySplit(meal.tags(), ', ')}"
-                        th:text="${tag}">
-                        Tag
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
+        <p th:if="${#lists.isEmpty(savedMeals)}">No Saved Meals.</p>
     </div>
 
     <!-- Daily Goals -->
