@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<title>Grocery | MealMate</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#F8FAF8;
+    color:#1F2937;
+    min-height:100vh;
+}
+
+.menu{
+    position:fixed;
+    top:20px;
+    left:20px;
+    width:54px;
+    height:54px;
+    border-radius:16px;
+    background:white;
+    color:#5F8D4E;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    cursor:pointer;
+    border:1px solid #E5E7EB;
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
+    z-index:1001;
+    transition:.3s;
+}
+
+.menu:hover{
+    background:#5F8D4E;
+    color:white;
+}
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:-260px;
+    width:250px;
+    height:100vh;
+    background:white;
+    border-right:1px solid #E5E7EB;
+    padding:30px;
+    transition:.35s;
+    box-shadow:5px 0 25px rgba(0,0,0,.05);
+    z-index:1000;
+}
+
+.sidebar.active{
+    left:0;
+}
+
+.logo{
+    margin-top:70px;
+    margin-bottom:40px;
+    font-size:32px;
+    font-weight:700;
+    color:#5F8D4E;
+}
+
+.sidebar a{
+    display:block;
+    text-decoration:none;
+    color:#374151;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:8px;
+    transition:.25s;
+}
+
+.sidebar a:hover{
+    background:#EEF6EE;
+    color:#5F8D4E;
+    transform:translateX(5px);
+}
+
+.sidebar button{
+    width:100%;
+    background:none;
+    border:none;
+    text-align:left;
+    padding:15px;
+    border-radius:12px;
+    color:#374151;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.sidebar button:hover{
+    background:#FEE2E2;
+    color:#DC2626;
+}
+
+.main{
+    padding:40px;
+    transition:.35s;
+}
+
+.main.active{
+    margin-left:250px;
+}
+
+.header{
+    margin-top:80px;
+    margin-bottom:35px;
+}
+
+.header h1{
+    font-size:42px;
+}
+
+.header p{
+    color:#6B7280;
+    margin-top:8px;
+}
+
+.update-area{
+    margin-bottom:30px;
+}
+
+.update-btn{
+    background:#5F8D4E;
+    color:white;
+    border:none;
+    padding:15px 35px;
+    border-radius:14px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:.25s;
+}
+
+.update-btn:hover{
+    background:#4F7641;
+    transform:translateY(-3px);
+}
+
+.update-btn:disabled{
+    opacity:.75;
+    cursor:wait;
+    transform:none;
+}
+
+.ai-loading{
+    display:none;
+    max-width:520px;
+    margin:18px 0 0;
+    background:white;
+    border:1px solid #E5E7EB;
+    border-radius:14px;
+    padding:14px 16px;
+    box-shadow:0 12px 30px rgba(0,0,0,.05);
+}
+
+.ai-loading.active{
+    display:block;
+}
+
+.ai-loading p{
+    color:#6B7280;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.loading-track{
+    height:10px;
+    background:#EEF6EE;
+    border-radius:50px;
+    overflow:hidden;
+}
+
+.loading-bar{
+    height:100%;
+    width:45%;
+    border-radius:50px;
+    background:#5F8D4E;
+    animation:loadingBar 1.2s ease-in-out infinite;
+}
+
+@keyframes loadingBar{
+    0%{ transform:translateX(-110%); }
+    100%{ transform:translateX(240%); }
+}
+
+.grocery-grid{
+    display:grid;
+    grid-template-columns:1fr 1.5fr;
+    gap:30px;
+}
+
+.panel{
+    background:white;
+    border:1px solid #E5E7EB;
+    border-radius:24px;
+    padding:25px;
+    box-shadow:0 12px 30px rgba(0,0,0,.05);
+}
+
+.panel h2{
+    margin-bottom:18px;
+    color:#1F2937;
+}
+
+.panel p{
+    color:#6B7280;
+    line-height:1.7;
+}
+
+.list{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.list li{
+    background:#F8FAF8;
+    border-left:4px solid #5F8D4E;
+    border-radius:14px;
+    padding:13px 15px;
+    color:#374151;
+    font-weight:500;
+}
+
+@media(max-width:900px){
+    .grocery-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:700px){
+    .main{
+        padding:25px;
+    }
+
+    .main.active{
+        margin-left:0;
+    }
+
+    .header h1{
+        font-size:34px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="menu" onclick="toggleSidebar()">
+☰
+</div>
+
+<div class="sidebar">
+
+<div class="logo">
+MealMate
+</div>
+
+<a href="/dashboard/dashboard">
+Dashboard
+</a>
+
+<a href="/dashboard/meals">
+Meals
+</a>
+
+<a href="/dashboard/planner">
+Planner
+</a>
+
+<a href="/dashboard/grocery">
+Grocery
+</a>
+
+<a href="/dashboard/settings">
+Settings
+</a>
+
+<form action="/logout" method="post">
+<button type="submit">
+Logout
+</button>
+</form>
+
+</div>
+
+<div class="main">
+
+<div class="header">
+<h1>
+Grocery List
+</h1>
+<p>
+Generate ingredients from your saved meals.
+</p>
+</div>
+
+<form action="/dashboard/grocery/update" method="post" class="ai-form">
+<div class="update-area">
+<button class="update-btn" type="submit">
+Update Grocery List
+</button>
+</div>
+
+<div class="ai-loading">
+<p>
+Building your grocery list...
+</p>
+<div class="loading-track">
+<div class="loading-bar">
+</div>
+</div>
+</div>
+
+</form>
+
+<div class="grocery-grid">
+
+<div class="panel">
+<h2>
+Saved Meals
+</h2>
+
+<ul class="list" th:if="${hasSavedMeals}">
+<li th:each="meal : ${savedMeals}" th:text="${meal.mealNames}">
+Saved Meal
+</li>
+</ul>
+
+<p th:unless="${hasSavedMeals}">
+No saved meals yet.
+</p>
+</div>
+
+<div class="panel">
+<h2>
+Ingredients
+</h2>
+
+<ul class="list" th:if="${hasGroceryIngredients}">
+<li th:each="ingredient : ${groceryIngredients}" th:text="${ingredient.name}">
+Ingredient
+</li>
+</ul>
+
+<p th:unless="${hasGroceryIngredients}" th:text="${groceryStatus}">
+Click update to create a grocery list from your saved meals.
+</p>
+</div>
+
+</div>
+
+</div>
+
+<script>
+const sidebar = document.querySelector(".sidebar");
+const main = document.querySelector(".main");
+const menu = document.querySelector(".menu");
+
+function toggleSidebar(){
+    sidebar.classList.toggle("active");
+    main.classList.toggle("active");
+}
+
+document.addEventListener("click", function(event){
+    if(!sidebar.contains(event.target) && !menu.contains(event.target)){
+        sidebar.classList.remove("active");
+        main.classList.remove("active");
+    }
+});
+
+document.querySelectorAll(".ai-form").forEach((form)=>{
+    form.addEventListener("submit",()=>{
+        const button = form.querySelector("button[type='submit']");
+        const loading = form.querySelector(".ai-loading");
+
+        if(button){
+            button.disabled = true;
+            button.textContent = "Working...";
+        }
+
+        if(loading){
+            loading.classList.add("active");
+        }
+    });
+});
+</script>
+
+</body>
+
+</html>
